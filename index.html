@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="nb">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Skjemabyggeren</title>
+    <meta name="description" content="Komponentene i LecaForms, Husbankens skjemarammeverk, med en byggeflate for å sette dem sammen til et skjema." />
+    <link rel="stylesheet" href="fasaden/fasaden.css" />
+    <link rel="stylesheet" href="assets/leca.css" />
+    <link rel="stylesheet" href="assets/app.css" />
+  </head>
+  <body>
+    <header class="sb-topp">
+      <div class="sb-merke">
+        <span class="sb-logo" aria-hidden="true"></span>
+        <div>
+          <h1 class="sb-topp-tittel">Skjemabyggeren</h1>
+          <p class="sb-topp-under">LecaForms-komponentene med Fasaden 26.0.1</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="sb-delt">
+      <section class="sb-venstre" aria-labelledby="bibliotek-tittel">
+        <div class="sb-venstre-topp">
+          <div class="sb-rad">
+            <h2 id="bibliotek-tittel" class="sb-panel-tittel">Komponenter</h2>
+            <label class="sb-sok"><span class="sb-skjult">Søk i komponentene</span><input id="sok" type="search" placeholder="Søk" autocomplete="off" /></label>
+          </div>
+          <nav id="bibliotek-nav" class="sb-nav" aria-label="Komponentgrupper"></nav>
+        </div>
+        <div id="bibliotek" class="sb-bibliotek"></div>
+      </section>
+
+      <section class="sb-hoyre" aria-labelledby="bygger-tittel">
+        <div class="sb-hoyre-topp">
+          <h2 id="bygger-tittel" class="sb-panel-tittel">Skjema <span class="sb-antall" id="antall">0</span></h2>
+          <div class="sb-verktoylinje">
+            <div class="sb-segment" role="group" aria-label="Skjermbredde">
+              <button type="button" data-enhet="desktop" aria-pressed="true">Desktop</button>
+              <button type="button" data-enhet="mobil" aria-pressed="false">Mobil</button>
+            </div>
+            <label class="sb-bryter"><input type="checkbox" id="vis-spacing" /><span>Vis spacing</span></label>
+            <button type="button" class="sb-knapp" id="prefiks-av">Prefiks</button>
+            <button type="button" class="sb-knapp" id="vis-dsl">Vis kode</button>
+            <button type="button" class="sb-knapp sb-knapp--stille" id="tom">Tøm</button>
+          </div>
+        </div>
+        <div id="lerret" class="sb-lerret">
+          <div id="side" class="sb-side fasaden"></div>
+        </div>
+        <aside id="inspektor" class="sb-inspektor" aria-label="Egenskaper" hidden></aside>
+      </section>
+    </main>
+
+    <div id="indikator" class="sb-indikator" hidden></div>
+
+    <dialog id="dsl-dialog" class="sb-dialog" aria-labelledby="dsl-tittel">
+      <div class="sb-dialog-topp">
+        <h2 id="dsl-tittel" class="sb-panel-tittel">LecaForms-kode for steget</h2>
+        <div class="sb-rad">
+          <button type="button" class="sb-knapp sb-knapp--fylt" id="kopier-dsl">Kopier</button>
+          <button type="button" class="sb-knapp" id="lukk-dsl">Lukk</button>
+        </div>
+      </div>
+      <pre id="dsl-kode" class="sb-kode sb-kode--stor"></pre>
+    </dialog>
+
+    <script src="assets/ikoner.js"></script>
+    <script src="assets/komponenter.js"></script>
+    <script src="assets/app.js"></script>
+  </body>
+</html>
