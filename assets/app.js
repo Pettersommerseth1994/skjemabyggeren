@@ -181,8 +181,15 @@
       ? skjema.blokker.map(renderBlokk).join('')
       : `<div class="sb-tom sb-tom--rot"><strong>Dra komponenter hit</strong><span>eller trykk «Legg til» på et kort til venstre</span><button type="button" class="sb-eksempel">Last inn et eksempel</button></div>`;
     side.innerHTML = `<div class="sb-kolonne">
-      <p class="hb-text--ingress hb-mt--2xl sb-intro" data-maal="intro">Bygg ditt eget skjema her og se hvordan det vil se ut</p>
+      ${
+        skjema.eksempel
+          ? `<h1 class="hb-h1 hb-text--3xl hb-mt--2xl hb-mb--lg sb-tittel" data-maal="intro">${
+              skjema.prefiks ? `<span class="hb-text--ingress sb-redigerbar" contenteditable="plaintext-only" data-felt="prefiks" spellcheck="false">${esc(skjema.prefiks)}</span><br>` : ''
+            }<span class="sb-redigerbar" contenteditable="plaintext-only" data-felt="tittel" spellcheck="false">${esc(skjema.tittel)}</span></h1>`
+          : `<p class="hb-text--ingress hb-mt--2xl sb-intro" data-maal="intro">Bygg ditt eget skjema her og se hvordan det vil se ut</p>`
+      }
       <div class="sb-rot" data-liste="rot">${rot}</div>
+      ${skjema.eksempel ? `<div data-maal="knapper">${stegknapper({ forste: false })}</div>` : ''}
       <div class="sb-maallag" aria-hidden="true"></div>
     </div>`;
     $('#antall').textContent = tellBlokker(skjema.blokker);
@@ -216,7 +223,7 @@
 
     const synlige = (el) => el && el.offsetParent !== null && el.getBoundingClientRect().height > 0;
 
-    const rekke = [$('[data-maal="intro"]'), ...$$(':scope > .sb-blokk', $('.sb-rot'))].filter(synlige);
+    const rekke = [$('[data-maal="intro"]'), ...$$(':scope > .sb-blokk', $('.sb-rot')), $('[data-maal="knapper"]')].filter(synlige);
     const forste = rekke[0].getBoundingClientRect();
     band(0, 0, base.width, forste.top - base.top, etikett(forste.top - base.top));
     for (let i = 0; i < rekke.length - 1 && skjema.blokker.length; i++) {
@@ -422,6 +429,7 @@
     skjema = {
       tittel: 'Om deg og boligen',
       prefiks: 'Steg 1 av 4',
+      eksempel: true,
       blokker: [
         b('FormattedText', { stil: 'ingress', tekst: 'Vi trenger noen opplysninger om deg og boligen du vil oppgradere.' }),
         b('TextField', { label: 'Hva heter du?' }),
@@ -747,7 +755,7 @@
   });
   $('#tom').addEventListener('click', () => {
     if (!skjema.blokker.length || confirm('Fjerne alle komponentene fra skjemaet?')) {
-      skjema.blokker = [];
+      skjema = tomtSkjema();
       valgt = null;
       endre(() => {});
     }
