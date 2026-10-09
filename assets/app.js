@@ -181,11 +181,8 @@
       ? skjema.blokker.map(renderBlokk).join('')
       : `<div class="sb-tom sb-tom--rot"><strong>Dra komponenter hit</strong><span>eller trykk «Legg til» på et kort til venstre</span><button type="button" class="sb-eksempel">Last inn et eksempel</button></div>`;
     side.innerHTML = `<div class="sb-kolonne">
-      <h1 class="hb-h1 hb-text--3xl hb-mt--2xl hb-mb--lg sb-tittel" data-maal="tittel">${
-        skjema.prefiks ? `<span class="hb-text--ingress sb-redigerbar" contenteditable="plaintext-only" data-felt="prefiks" spellcheck="false">${esc(skjema.prefiks)}</span><br>` : ''
-      }<span class="sb-redigerbar" contenteditable="plaintext-only" data-felt="tittel" spellcheck="false">${esc(skjema.tittel)}</span></h1>
+      <p class="hb-text--ingress hb-mt--2xl sb-intro" data-maal="intro">Bygg ditt eget skjema her og se hvordan det vil se ut</p>
       <div class="sb-rot" data-liste="rot">${rot}</div>
-      <div data-maal="knapper">${stegknapper({ forste: false })}</div>
       <div class="sb-maallag" aria-hidden="true"></div>
     </div>`;
     $('#antall').textContent = tellBlokker(skjema.blokker);
@@ -219,7 +216,7 @@
 
     const synlige = (el) => el && el.offsetParent !== null && el.getBoundingClientRect().height > 0;
 
-    const rekke = [$('[data-maal="tittel"]'), ...$$(':scope > .sb-blokk', $('.sb-rot')), $('[data-maal="knapper"]')].filter(synlige);
+    const rekke = [$('[data-maal="intro"]'), ...$$(':scope > .sb-blokk', $('.sb-rot'))].filter(synlige);
     const forste = rekke[0].getBoundingClientRect();
     band(0, 0, base.width, forste.top - base.top, etikett(forste.top - base.top));
     for (let i = 0; i < rekke.length - 1 && skjema.blokker.length; i++) {
@@ -746,10 +743,6 @@
   );
   $('#vis-spacing').addEventListener('change', (e) => {
     visSpacing = e.target.checked;
-    renderLerret();
-  });
-  $('#prefiks-av').addEventListener('click', () => {
-    skjema.prefiks = skjema.prefiks ? '' : 'Steg 1 av 4';
     renderLerret();
   });
   $('#tom').addEventListener('click', () => {
