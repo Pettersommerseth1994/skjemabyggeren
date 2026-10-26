@@ -4,7 +4,7 @@ Komponentene i LecaForms, skjemarammeverket i Husbankens lånesøknad, på én
 side. Til venstre står hver komponent med tilstandene sine, som i Storybook.
 Til høyre er en byggeflate: dra komponentene over og sett sammen et steg.
 
-Publisert på https://pettersommerseth1994.github.io/skjemabyggeren/
+Publisert på https://husbanken-skjemarammeverk.no/
 
 ## Slik bruker du den
 
